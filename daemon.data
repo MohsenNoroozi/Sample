@@ -1,0 +1,18 @@
+# Passing list details to Shell daemon after user confirm the list upload -> http://10.15.10.21:29966/
+{"cmd":"process-csv","stage":"all-stages","list-id":"list-id":"123"}
+# Shell daemon Response 
+{"list-id":"123","rate":"","status":"OK","status-msg":"OK"}
+
+#Quick API Request -> http://10.15.10.21:29977/
+{"email":"example@example.com","orig-ip":"84.16.92.163","type":"quick","user-id":"5313"}
+#Quick API Response 
+{"email":"testemail3@yopmail.com","email_status":"spam-trap","free_mail":"no","status":"OK","status_msg":"API Successful","typo_fixed":"no"}
+
+#Deep API Request -> http://10.15.10.21:29977/
+{"email":"example@example.com","orig-ip":"84.16.92.163","type":"deep","user-id":"5313"}
+#Deep API Response
+#If email_status == processing, it mean this is the first time this email being cleaned by this user and response should be below and we deducted 1 credit
+{"email":"astrid.achipiz-ext@sanofi.com","email_status":"processing","free_mail":"no","status":"OK","status_msg":"API Successful","typo_fixed":"no"}
+#Else we don't deduct credit from the user and response processing if the status is  in-processing otherwise we response with the status we got from the daemon response
+{"email":"astrid.achipiz-ext@sanofi.com","email_status":"in-processing","free_mail":"no","status":"OK","status_msg":"API Successful","typo_fixed":"no"}
+
